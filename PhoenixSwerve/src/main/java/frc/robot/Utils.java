@@ -2,6 +2,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
+import frc.robot.generated.DragonConfigs;
+import frc.robot.generated.RubyConfigs;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 public class Utils {
     public static String getRobotId() {
@@ -24,4 +27,18 @@ public class Utils {
         }
     }
 
+    public static CommandSwerveDrivetrain createDrivetrainAuto(String ID){
+        if(ID.equals("ruby")){
+            System.out.println("Creating Ruby Drivetrain");
+            return RubyConfigs.createDrivetrain();
+        }
+        else if(ID.equals("waverunner")){
+            System.out.println("Creating Waverunner Drivetrain");
+            return DragonConfigs.createDrivetrain();
+        }
+        else
+            System.out.println("error finding/parsing robot ID defaulting to ruby");
+        
+        return RubyConfigs.createDrivetrain();
+    }
 }
