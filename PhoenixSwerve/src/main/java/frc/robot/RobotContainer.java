@@ -16,16 +16,16 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
-
+import frc.robot.Utils.RobotName;
 import frc.robot.generated.DragonConfigs;
 import frc.robot.generated.RubyConfigs;
 
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 public class RobotContainer {
-    String robotID=Utils.getRobotId();
+    RobotName robotName=Utils.getRobotName();
     
-    private double MaxSpeed = DragonConfigs.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
+    private double MaxSpeed = Utils.setMaxSpeedAuto(robotName); // kSpeedAt12Volts desired top speed
 
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
@@ -40,7 +40,7 @@ public class RobotContainer {
 
     private final CommandXboxController joystick = new CommandXboxController(0);
 
-    public final CommandSwerveDrivetrain drivetrain = Utils.createDrivetrainAuto(robotID);
+    public final CommandSwerveDrivetrain drivetrain = Utils.createDrivetrainAuto(robotName);
 
     public RobotContainer() {
         configureBindings();
